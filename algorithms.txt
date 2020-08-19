@@ -1,0 +1,22 @@
+Get to story mode from home:
+    -> Quests
+    -> Story
+    -> Start story_mode with limit
+
+Story Mode:
+    -> find not done cutscene
+    -> find not done Story (left most one)
+    -> prepare for quest
+    -> remove ally
+    -> start quest
+    -> skip
+    -> next quest
+
+{% comment %} Change Story:
+    -> confirm no undone story on screen
+    -> select part
+    -> if in hard mode, click to switch to normal
+    -> check for next with 0%
+    -> click it
+    ->  {% endcomment %} ON HIATUS
+
