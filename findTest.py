@@ -9,7 +9,7 @@ import random
 import win32api, win32con
 
 # usePath = ""
-usePath = "assets\homepage_quest_button.png"
+usePath = "assets\story_quest_big_not_done.jpg"
 
 # while keyboard.is_pressed('q') == False:
 #     if (pyautogui.locateAllOnScreen(usePath, confidence = 0.8) != None) or (pyautogui.locateAllOnScreen(usePath, confidence = 0.8) != ImageNotFoundException):

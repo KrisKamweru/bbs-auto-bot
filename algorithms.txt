@@ -1,4 +1,4 @@
-Get to story mode from home:
+DONE:: Get to story mode from home:
     -> Quests
     -> Story
     -> Start story_mode with limit
