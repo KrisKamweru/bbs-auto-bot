@@ -116,22 +116,70 @@ def homeToStory():
     findAndClickWhenFound("assets\quests_story.jpg")
 
 def storyPlay(ticketLimit):
-    counter = 0
+    counter = 0 # Counter for the tickets spent
+    endCounter = 0 #Inactivity counter
     while keyboard.is_pressed('q') == False:
-        tryFindAndClick("assets\cutscene_not_done.png")
-        tryFindAndClick("assets\cutscene_cleared_screen.png")
-        tryFindLeftMostAndClick("assets\story_quest_normal_not_done.png")
-        tryFindLeftMostAndClick("assets\story_quest_big_not_done.jpg")
-        tryFindAndClick("assets\prep_for_quest.jpg")
-        tryFindAndClick("assets\cancel_ally.jpg")
-        tryFindAndClick("assets\start_normal_1_ticket.jpg")
-        tryFindAndClick("assets\skip.jpg")
+        #Run the various searches, and reset the inactivity counter if they work
+        
+        failsearch = 0 # Variable that gets incremented every time a search doesn't find its target
+
+        if tryFindAndClick("assets\cutscene_not_done.png"):
+            endCounter = 0
+        else:
+            failsearch += 1
+
+        if tryFindAndClick("assets\cutscene_cleared_screen.png"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
+        if tryFindLeftMostAndClick("assets\story_quest_normal_not_done.png"):
+            endCounter = 0
+        else:
+            failsearch += 1
+
+        if tryFindLeftMostAndClick("assets\story_quest_big_not_done.jpg"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
+        if tryFindAndClick("assets\prep_for_quest.jpg"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
+        if tryFindAndClick("assets\cancel_ally.jpg"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
+        if tryFindAndClick("assets\start_normal_1_ticket.jpg"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
+        if tryFindAndClick("assets\skip.jpg"):
+            endCounter = 0
+        else:
+            failsearch += 1
+        
         if tryFindAndClick("assets\story_next_quest.png") == True:
             counter += 1
+            endCounter = 0
+        else:
+            failsearch += 1
+
         if ticketLimit != 0:
             if counter >= ticketLimit:
                 return True
 
+        if failsearch >= 9:
+            # If none of the searches return a positive value, increment the inactivity counter
+            endCounter += 1
+            if endCounter >= 36:
+                # If the inactivity counter reaches the set limit, terminate the function
+                return False
+
 
 # homeToStory()
-storyPlay(50)
+storyPlay(53)

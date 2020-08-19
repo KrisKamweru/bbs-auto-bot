@@ -3,7 +3,7 @@ DONE:: Get to story mode from home:
     -> Story
     -> Start story_mode with limit
 
-Story Mode:
+DONE:: Story Mode:
     -> find not done cutscene
     -> find not done Story (left most one)
     -> prepare for quest
@@ -20,3 +20,18 @@ Story Mode:
     -> click it
     ->  {% endcomment %} ON HIATUS
 
+Farm Crystals:
+
+Farm Jewels:
+
+Farm Resurrection Rings:
+
+Farm daily scrolls:
+
+Farm single player IZ:
+
+Farm extreme co-op:
+
+Farm co-op IZ:
+
+Farm ER:
