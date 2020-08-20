@@ -13,7 +13,7 @@
 #  
 # Determine what images are needed for all scenarios
 #  
-# Create function for getting from the game load screen to home screen
+# DONE:: Create function for getting from the game load screen to home screen
 # Create a function for getting from any screen to the home screen
 #
 # DONE:: Create click funtion
