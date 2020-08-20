@@ -110,76 +110,133 @@ def tryFindLeftMostAndClick(usePath):
     else:
         return False
         
-
 def homeToStory():
     findAndClickWhenFound("assets\homepage_quest_button.png")
     findAndClickWhenFound("assets\quests_story.jpg")
 
 def storyPlay(ticketLimit):
     counter = 0 # Counter for the tickets spent
-    endCounter = 0 #Inactivity counter
-    while keyboard.is_pressed('q') == False:
+    endCounter = 0 # Inactivity counter
+    failsearch = 0 # Variable that gets incremented every time a search doesn't find its target
+    limitReached = False # Flag for telling the function the ticket limit has been reached. Prohibits certain actions
+    inMission = False # Flag for telling the function if the game is in a mission or not
+    timeOutLimit = 120
+
+    while (keyboard.is_pressed('q') == False):        
         #Run the various searches, and reset the inactivity counter if they work
-        
-        failsearch = 0 # Variable that gets incremented every time a search doesn't find its target
 
-        if tryFindAndClick("assets\cutscene_not_done.png"):
-            endCounter = 0
-        else:
-            failsearch += 1
+        if inMission: # What to search for while in a mission
+            if tryFindAndClick("assets\skip.jpg"):
+                endCounter = 0
+                continue
+            else:
+                failsearch += 1
 
-        if tryFindAndClick("assets\cutscene_cleared_screen.png"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindLeftMostAndClick("assets\story_quest_normal_not_done.png"):
-            endCounter = 0
-        else:
-            failsearch += 1
+            if tryFindAndClick("assets\story_next_quest.png") == True:
+                endCounter = 0
+                inMission = False
+                continue
+            else:
+                failsearch += 1
 
-        if tryFindLeftMostAndClick("assets\story_quest_big_not_done.jpg"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindAndClick("assets\prep_for_quest.jpg"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindAndClick("assets\cancel_ally.jpg"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindAndClick("assets\start_normal_1_ticket.jpg"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindAndClick("assets\skip.jpg"):
-            endCounter = 0
-        else:
-            failsearch += 1
-        
-        if tryFindAndClick("assets\story_next_quest.png") == True:
-            counter += 1
-            endCounter = 0
-        else:
-            failsearch += 1
+            if pyautogui.locateOnScreen("assets/auto_is_on.png", confidence = 0.8) == None:
+                failsearch += 1
+            
+            while pyautogui.locateOnScreen("assets/auto_is_on.png", confidence = 0.8) != None:
+                endCounter = 0
+                time.sleep(10)
+
+        else: # What to search for when not in a mission
+            if tryFindAndClick("assets\cutscene_not_done_2.png"):
+                endCounter = 0
+                continue
+            else:
+                failsearch += 1
+
+            if tryFindAndClick("assets\cutscene_cleared_screen.png"):
+                endCounter = 0
+                continue
+            else:
+                failsearch += 1
+            
+            if tryFindLeftMostAndClick("assets\story_quest_normal_not_done.png"):
+                endCounter = 0
+                continue
+            else:
+                failsearch += 1
+            
+            if tryFindAndClick("assets\prep_for_quest.jpg"):
+                endCounter = 0
+                findAndClickWhenFound("assets\cancel_ally.jpg")
+            else:
+                failsearch += 1
+            
+            if not limitReached:
+                if tryFindAndClick("assets\start_normal_1_ticket.jpg"):
+                    counter += 1
+                    endCounter = 0
+                    inMission = True
+                    time.sleep(45)
+                    continue
+            
+            if tryFindAndClick("assets\skip.jpg"):
+                endCounter = 0
+                continue
+            else:
+                failsearch += 1
+
+            if tryFindAndClick("assets/story_hard_difficulty_unlocked_dialog_close.png"):
+                for num in range(0,5):
+                    if tryFindAndClick("assets/story_normal_select_part_not_done_0.png"):
+                        break
+                    else:
+                        time.sleep(5)
+                continue
 
         if ticketLimit != 0:
-            if counter >= ticketLimit:
+            # If not in unlimitted runs mode
+            if (counter > ticketLimit) and (not inMission):
+                # If the ticket limit has been reached, and the game is not currently in a mission, terminate the function returning a True value
                 return True
+            elif (counter > ticketLimit) and (inMission):
+                # If the ticket limit has been reached, but the game is currently in a mission, change the limitReached Flag to True.
+                limitReached = True
 
-        if failsearch >= 9:
-            # If none of the searches return a positive value, increment the inactivity counter
+        if (failsearch >= 5) and (not inMission):
+            # If none of the searches return a positive value while the game is not in a mission, increment the inactivity counter
             endCounter += 1
-            if endCounter >= 36:
-                # If the inactivity counter reaches the set limit, terminate the function
+            if (endCounter % 5 == 0):
+                #Try and change the inMission flag every 5 runs where no searches yielded results
+                inMission = not inMission    
+        elif (failsearch >= 3) and inMission:
+            # If none of the searches return a positive value while the game is in a mission, increment the inactivity counter
+            endCounter += 1
+            if (endCounter % 20 == 0):
+                #Try and change the inMission flag every 20 runs where no searches yielded results
+                inMission = not inMission
+        
+        if endCounter >= timeOutLimit:
+                # If the inactivity counter reaches the set limit, terminate the function returning a False Value
                 return False
 
+def landingToHome():
+    findAndClickWhenFound("assets\landing_page.png")
+    
+    for num in range(0,5):
+        if tryFindAndClick("assets/download_data_landing_page_yes.png"):
+            time.sleep(30)
+            break
+        time.sleep(2)
 
+    for num in range(0,10):
+        if tryFindAndClick("assets/do_not_display_news.png"):
+            time.sleep(5)
+            break
+        time.sleep(2)    
+
+# Delay to start program in seconds
+time.sleep(5)
+
+# landingToHome()
 # homeToStory()
-storyPlay(53)
+storyPlay(9)
