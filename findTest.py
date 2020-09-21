@@ -28,7 +28,15 @@ def lookFor(usePath):
             print("Not found")
             time.sleep(1)
 
-usePath = "assets\story_quest_normal_not_done.png"
+usePath = "assets\story_previous_area_button.png"
 
 # multiLookFor(usePath)
-# lookFor(usePath)
+lookFor(usePath)
+
+# readFile = open("ticketLimit.txt", "r")
+
+# if readFile.mode == "r":
+#     contents = readFile.read()
+#     contents = int(contents)
+#     print(contents)
+#     print(type(contents))
