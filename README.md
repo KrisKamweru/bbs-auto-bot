@@ -39,7 +39,7 @@ Once you have it running, it'll run in the background and do all it needs to do.
 - If it doesn't initially work (nothing appears to be happening), it's probably due to window size, a limitation of the image recognition software I'm using.
   - Easiest way to fix this would be to open the game in the emulator and make sure it's on the homepage (where you see your team, as well as the quests and brave battles buttons)
   - Then you wanna modify `findTest.py` (right click the file and open using notepad)
-  - Find the line that has the line `usePath = "assets\story_previous_area_button.png` and replace it with `usePath = "assets\homepage_quest_button.png`
+  - Find the line that has the line `usePath = "assets\story_previous_area_button.png"` and replace it with `usePath = "assets\homepage_quest_button.png"`
   - run `python findTest.py` and it'll start printing in the console either `Not found` or some coordinates.
   - If it's the latter, you're good to go. If it's the former, resize the window until it starts printing coordinates, allowing a few seconds between resizes. Once you get coordinates, you can go back to running `python farmbot.py` and it should work
 
