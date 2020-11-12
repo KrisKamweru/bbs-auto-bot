@@ -8,7 +8,7 @@ Have python installed. You can grab the installer, if you don't have it already,
 
 ## How to run:
 1. Download the files of this repo
-   - Locate the green button at the top of this page that says 'code' or something similar
+   - Locate the green button at the top of this page that says **'code'** or something similar
    - Click it, then click the download zip option
 2. Extract the zip file and open the folder it was extracted to
 3. Click the address bar (where you see some folder names, with the last one being the name of the folder you are currently in) and copy the text. We will need it in a bit.
@@ -17,12 +17,12 @@ Have python installed. You can grab the installer, if you don't have it already,
    - search command prompt
    - click it to open a new window
 5. Navigate to where the bot files are located
-   - type 'cd ' (including the space, excluding the quotes)
+   - type `cd ` (including the space)
    - right click to paste the text we copied earlier
    - press enter
-6. In the folder where the files are, open the file ticketLimit.txt and change the number to however many tickets you want the bot to spend
+6. In the folder where the files are, open the file `ticketLimit.txt` and change the number to however many tickets you want the bot to spend
 7. Open your emulator, and open the bleach brave souls application
-8. In the command prompt window, type 'python farmbot.py' (excluding quotes) and press enter to run the bot
+8. In the command prompt window, type `python farmbot.py` and press enter to run the bot
 
 That's it!
 Once you have it running, it'll run in the background and do all it needs to do. For subsequent runs you will only need to start at step 3.
@@ -38,12 +38,12 @@ Once you have it running, it'll run in the background and do all it needs to do.
 
 - If it doesn't initially work (nothing appears to be happening), it's probably due to window size, a limitation of the image recognition software I'm using.
   - Easiest way to fix this would be to open the game in the emulator and make sure it's on the homepage (where you see your team, as well as the quests and brave battles buttons)
-  - Then you wanna modify findTest.py (right click the file and open using notepad)
-  - Find the line that has the line: usePath = "assets\story_previous_area_button.png" and replace it with: usePath = "assets\homepage_quest_button.png"
-  - run 'python findTest.py' and it'll start printing in the console either "not found" or some coordinates.
-  - If it's the latter, you're good to go. If it's the former, resize the window until it starts printing coordinates, allowing a few seconds between resizes. Once you get coordinates, you can go back to running 'python farmbot.py' and it should work
+  - Then you wanna modify `findTest.py` (right click the file and open using notepad)
+  - Find the line that has the line `usePath = "assets\story_previous_area_button.png` and replace it with `usePath = "assets\homepage_quest_button.png`
+  - run `python findTest.py` and it'll start printing in the console either `Not found` or some coordinates.
+  - If it's the latter, you're good to go. If it's the former, resize the window until it starts printing coordinates, allowing a few seconds between resizes. Once you get coordinates, you can go back to running `python farmbot.py` and it should work
 
-- Also note that you need to change the number in ticketLimit.txt to reflect how many tickets you want the bot to spend.
+- Also note that you need to change the number in `ticketLimit.txt` to reflect how many tickets you want the bot to spend.
 
 - Finally, as mentioned earlier, this is alpha software, some bugs are to be expected. Fortunately, bugs in this bot simply mean it will stop working. It cannot do erroneous clicks like accidentaly entering brave battles or spending orbs, as it does not have the functionality to do so (the biggest benefit to using image recognition, and the whole reason I chose this over coordinate and based macros that most emulators have built in)
 
