@@ -109,6 +109,21 @@ def tryFindLeftMostAndClick(usePath):
         return True
     else:
         return False
+
+def tryFind(usePath):
+    # Will try and find the image. Returns false if nothing is found, true if it is.
+    coords = pyautogui.locateOnScreen(usePath, confidence = 0.8)
+    if coords == None:
+        return False
+    else:
+        return True
+
+def readFileForTickets(ticketFile):
+    readFile = open(ticketFile, "r")
+
+    if readFile.mode == "r":
+        contents = readFile.read()
+        return int(contents)
         
 def homeToStory():
     findAndClickWhenFound("assets\homepage_quest_button.png")
@@ -193,6 +208,7 @@ def storyPlay(ticketLimit):
                         time.sleep(5)
                 continue
 
+        
         if ticketLimit != 0:
             # If not in unlimitted runs mode
             if (counter > ticketLimit) and (not inMission):
@@ -206,6 +222,10 @@ def storyPlay(ticketLimit):
             # If none of the searches return a positive value while the game is not in a mission, increment the inactivity counter
             endCounter += 1
             if (endCounter % 5 == 0):
+                if tryFind("assets\story_previous_area_button.png"):
+                    findAndClickWhenFound("assets\story_select_part.png")
+                    findAndClickWhenFound("assets/story_hard_select_part_not_done_0.png")
+                    continue
                 #Try and change the inMission flag every 5 runs where no searches yielded results
                 inMission = not inMission    
         elif (failsearch >= 3) and inMission:
