@@ -1,4 +1,4 @@
-# bbs-auto-bot
+# bbs-auto-bot [OUTDATED/UNMAINTAINED]
 A bot that autos PvE content in Bleach Brave Souls so you don't have to
 
 This bot is still in alpha development stage, meaning this bot doesn't have a GUI yet. it's still command line based. While it works just fine, there's a few extra steps needed to get it running. As of now, it only works with story mode farming. More will be added later
